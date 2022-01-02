@@ -23,7 +23,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let articles = json["articles"] as! Array<Dictionary<String, Any>>
                     print(articles)
                     self.newsData = articles
-                    
                     DispatchQueue.main.async {
                         self.tableViewMain.reloadData()
                     }
@@ -50,7 +49,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let row = news[idx]
             if let r = row as? Dictionary<String, Any> {
                 if let title = r["title"] as? String {
-                    cell.labelText.text = title                }
+                    cell.labelText.text = title
+                }
             }
         }
         return cell
@@ -58,10 +58,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("이건 \(indexPath.row) 입니다.")
-        
+
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(identifier: "NewsDetailController") as! NewsDetailController
-        
+
         if let news = newsData {
             let row = news[indexPath.row]
             if let r = row as? Dictionary<String, Any> {
